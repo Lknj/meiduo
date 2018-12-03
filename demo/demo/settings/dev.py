@@ -45,16 +45,24 @@ INSTALLED_APPS = [
 
     'users.apps.UserConfig',
 
+    # drf
     'rest_framework',
+    # 处理跨域的包
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
+    # 跨域,加在第一项
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'demo.urls'
@@ -199,3 +207,10 @@ REST_FRAMEWORK = {
     # 异常处理
     'EXCEPTION_HANDLER': 'utils.exceptions.exception_handler',
 }
+
+# CORS
+CORS_ORIGIN_WHITELIST = (
+    'www.meiduo.site:8080',
+
+)
+CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
