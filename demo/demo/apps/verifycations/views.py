@@ -3,6 +3,7 @@ from django_redis import get_redis_connection
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . import constants
+from celery_tasks.sms_code.tasks import send_sms_code
 
 
 # Create your views here.
@@ -47,6 +48,8 @@ class SmsView(APIView):
         )
         redis_pipeline.execute()  # 执行
         # 2.4 发短信, 可以调用第三方短信平台
-        print(sms_code)
+        # print(sms_code)
+        send_sms_code.delay(sms_code)
         # 3. 响应
+
         return Response({'message': 'ok'})
