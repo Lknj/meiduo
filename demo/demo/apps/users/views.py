@@ -13,3 +13,14 @@ class UsernameCountView(APIView):
             "username": username,
             "count": count
         })
+
+
+class MobileCountView(APIView):
+    def get(self, request, mobile):
+        # 查询手机号个数,判断手机号是存在
+        count = User.objects.filter(mobile=mobile).count()
+        # 响应
+        return Response({
+            'mobile': mobile,
+            'count': count
+        })
