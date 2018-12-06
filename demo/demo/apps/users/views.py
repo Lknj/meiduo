@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .serializers import UserRegisterSerializer
 
+
 class UsernameCountView(APIView):
     # 查询用户名个数,判断用户名是否存在
     def get(self, request, username):

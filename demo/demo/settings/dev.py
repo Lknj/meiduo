@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 添加导包路径
@@ -215,9 +217,21 @@ LOGGING = {
 REST_FRAMEWORK = {
     # 异常处理
     'EXCEPTION_HANDLER': 'utils.exceptions.exception_handler',
+    # 身份认证的方式
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # jwt=========客户端调用接口进行身份验证的方式
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # session=====用于admin
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
-# CORS
+# jwt
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}
+
+# CORS跨域白名单
 CORS_ORIGIN_WHITELIST = (
     'www.meiduo.site:8080',
 

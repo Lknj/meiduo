@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import User
 import re
 from django_redis import get_redis_connection
+from rest_framework_jwt.settings import api_settings
+
 
 # class UserRegisterSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.Serializer):
@@ -13,7 +15,10 @@ class UserRegisterSerializer(serializers.Serializer):
     # 2. 验证方法需要自己写
     # 3. 创建方法默认是将接收的值赋给属性,但是某些值不对应着属性,密码需要加密后再赋值
     # 结论: 使用Serializer
+
     id = serializers.IntegerField(read_only=True)
+    # 新增: 输出jwt
+    token = serializers.CharField(read_only=True)
     username = serializers.CharField(
         min_length=5,
         max_length=20,
@@ -99,4 +104,17 @@ class UserRegisterSerializer(serializers.Serializer):
         # 密码加密再保存
         user.set_password(validated_data.get('password'))
         user.save()
+
+        # 注册成功 状态保持 生成jwt
+        # 1.获取pyload方法
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        # 2.获取生成token的方法
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+        # 3.根据用户对象生成载荷
+        payload = jwt_payload_handler(user)
+        # 4.根据载荷生成token
+        token = jwt_encode_handler(payload)
+        # 5.输出
+        user.token = token
+
         return user
