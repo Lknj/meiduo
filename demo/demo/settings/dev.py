@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'verifycations.apps.VerifycationsConfig',
+    'oauth.apps.OauthConfig',
 
     # drf
     'rest_framework',
