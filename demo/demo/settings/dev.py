@@ -228,7 +228,13 @@ REST_FRAMEWORK = {
 
 # jwt
 JWT_AUTH = {
+    # 过期时间
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 指定响应结果
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'demo.utils.jwt_handler.jwt_response_handler',
+    # 指定载荷数据
+    'JWT_PAYLOAD_HANDLER': 'demo.utils.jwt_handler.jwt_payload_handler2',
+
 }
 
 # CORS跨域白名单
@@ -240,3 +246,6 @@ CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
 
 # 替换User模型
 AUTH_USER_MODEL = 'users.User'
+
+# 指定认证后端
+AUTHENTICATION_BACKENDS = ['users.utils.MeiduoModelBackend']
