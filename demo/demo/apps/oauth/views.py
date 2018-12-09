@@ -57,7 +57,7 @@ class QQUserView(CreateAPIView):
                 'username': qq.user.username,
                 'token': token
             })
-        pass
+
 
     # 将openid与用户绑定
     serializer_class = QQSerializer

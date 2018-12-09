@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import User
 from rest_framework.response import Response
-from rest_framework import generics
-from .serializers import UserRegisterSerializer
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from .serializers import UserRegisterSerializer, UserSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class UsernameCountView(APIView):
@@ -28,10 +29,30 @@ class MobileCountView(APIView):
         })
 
 
-class UserRegisterView(generics.CreateAPIView):
+class UserRegisterView(CreateAPIView):
     # 注册: 创建用户对象
     # 继承CreatAPIView, 接下来指定...
     # 创建不需要指定查询集
     # 需要指定序列化器类型
 
     serializer_class = UserRegisterSerializer
+
+
+class UserView(RetrieveAPIView):
+    # 要求登录后再访问
+    permission_classes = [IsAuthenticated]
+
+    # 个人信息页面,显示的数据,需要获取当前显示的用户对象,而不是根据主键查询用户对象
+    # queryset =
+    def get_object(self):
+        # 默认实现,从路径中获取pk,查询对象
+        '''
+        获取对象,用于retrieve/updata/destroy
+        :return:
+        '''
+        # 默认实现,从路径中获取pk,查询对象
+        # 获取当前登录的对象,而不是查询
+        # 不想使用默认实现,重写此方法,如获取当前登录的用户
+        return self.request.user
+
+    serializer_class = UserSerializer
