@@ -6,6 +6,9 @@ from itsdangerous import TimedJSONWebSignatureSerializer as TJWSS
 from django.conf import settings
 # from demo.settings import dev
 from . import constants
+from rest_framework.generics import CreateAPIView
+from .serializers import QQSerializer
+from demo.utils import jwt_token
 
 
 class QQLoginURLView(APIView):
@@ -23,7 +26,7 @@ class QQLoginURLView(APIView):
         return Response({'login_url': login_url})
 
 
-class QQUserView(APIView):
+class QQUserView(CreateAPIView):
     # 根据code获取openid
     def get(self, request):
         # 1. 获取code
@@ -42,15 +45,21 @@ class QQUserView(APIView):
             qq = OauthQQ.objects.get(openid=openid)
         except:
             # 4.2 未查询到数据,则提示绑定
-            tjwss = TJWSS(settings.SECRT_KEY, constants.OPENID_EXPIRES)
+            tjwss = TJWSS(settings.SECRET_KEY, constants.OPENID_EXPIRES)
             json = {'openid': openid}
             data = tjwss.dumps(json)
             return Response({'access_token': data})
         else:
             # 4.3 如果有数据,说明已经授权绑定过,则使用user状态保持
-            pass
+            token = jwt_token.generate(qq.user)
+            return Response({
+                'user_id': qq.user.id,
+                'username': qq.user.username,
+                'token': token
+            })
         pass
 
     # 将openid与用户绑定
-    def post(self, request):
-        pass
+    serializer_class = QQSerializer
+    # def post(self, request):
+    #     pass
