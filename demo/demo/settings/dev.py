@@ -250,3 +250,9 @@ AUTH_USER_MODEL = 'users.User'
 
 # 指定认证后端
 AUTHENTICATION_BACKENDS = ['users.utils.MeiduoModelBackend']
+
+# QQ登录的开发者信息
+QQ_CLIENT_ID = '101474184'
+QQ_CLIENT_SECRET = 'c6ce949e04e12ecc909ae6a8b09b637c'
+QQ_REDIRECT_URI = 'http://www.meiduo.site:8080/oauth_callback.html'
+QQ_STATE = '/'
