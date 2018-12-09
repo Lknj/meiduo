@@ -1617,3 +1617,11 @@ INFO 2018-12-09 12:45:00,415 basehttp 124 "GET /mobiles/13199999999/count/ HTTP/
 INFO 2018-12-09 12:45:00,460 basehttp 124 "GET /usernames/py234/count/ HTTP/1.1" 200 30
 INFO 2018-12-09 12:45:07,829 basehttp 124 "GET /usernames/py234/count/ HTTP/1.1" 200 30
 INFO 2018-12-09 12:45:07,841 basehttp 124 "GET /mobiles/13199999999/count/ HTTP/1.1" 200 34
+INFO 2018-12-09 14:45:17,662 basehttp 124 "GET /oauth/qq/authorization/?next=/ HTTP/1.1" 200 195
+INFO 2018-12-09 14:45:18,356 basehttp 124 "GET /oauth/qq/authorization/?next=/ HTTP/1.1" 200 195
+INFO 2018-12-09 14:45:44,980 basehttp 124 "GET /oauth/qq/user/?code=F926E125C9C4676F454DE00D4230E256 HTTP/1.1" 200 234
+INFO 2018-12-09 14:45:56,333 basehttp 124 "OPTIONS /user/ HTTP/1.1" 200 0
+INFO 2018-12-09 14:45:56,974 basehttp 124 "GET /user/ HTTP/1.1" 200 88
+INFO 2018-12-09 14:45:57,036 basehttp 124 "OPTIONS /browse_histories/ HTTP/1.1" 200 0
+WARNING 2018-12-09 14:45:57,219 base 152 Not Found: /browse_histories/
+WARNING 2018-12-09 14:45:57,228 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 3145
