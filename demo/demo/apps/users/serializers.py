@@ -3,7 +3,7 @@ from .models import User
 import re
 from django_redis import get_redis_connection
 from rest_framework_jwt.settings import api_settings
-
+from celery_tasks.send_active_mail.tasks import send_active_mail_task
 
 # class UserRegisterSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.Serializer):
@@ -134,6 +134,11 @@ class EmailSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         # 重写update()方法,保持原有的操作不变,新增发邮件的代码
         result = super().update(instance, validated_data)
+
         # 发邮件
+        send_active_mail_task.delay(
+            validated_data.get('email'),
+            instance.id
+        )
 
         return result
