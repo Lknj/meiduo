@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import User
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
-from .serializers import UserRegisterSerializer, UserSerializer
+from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView
+from .serializers import UserRegisterSerializer, UserSerializer, EmailSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -56,3 +55,16 @@ class UserView(RetrieveAPIView):
         return self.request.user
 
     serializer_class = UserSerializer
+
+
+class EmailView(UpdateAPIView):
+    '''
+    修改当前登录用户的邮箱属性
+    '''
+    # 要求登录
+    permission_classes = [IsAuthenticated]
+    # queryset =
+    # 重写get_object()方法
+    def get_object(self):
+        return self.request.user
+    serializer_class = EmailSerializer

@@ -1625,3 +1625,21 @@ INFO 2018-12-09 14:45:56,974 basehttp 124 "GET /user/ HTTP/1.1" 200 88
 INFO 2018-12-09 14:45:57,036 basehttp 124 "OPTIONS /browse_histories/ HTTP/1.1" 200 0
 WARNING 2018-12-09 14:45:57,219 base 152 Not Found: /browse_histories/
 WARNING 2018-12-09 14:45:57,228 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 3145
+INFO 2018-12-10 09:10:24,418 basehttp 124 "OPTIONS /user/ HTTP/1.1" 200 0
+INFO 2018-12-10 09:10:27,038 basehttp 124 "GET /user/ HTTP/1.1" 200 88
+INFO 2018-12-10 09:10:27,078 basehttp 124 "OPTIONS /browse_histories/ HTTP/1.1" 200 0
+WARNING 2018-12-10 09:10:27,490 base 152 Not Found: /browse_histories/
+WARNING 2018-12-10 09:10:27,496 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 3301
+INFO 2018-12-10 09:10:57,965 basehttp 124 "OPTIONS /emails/ HTTP/1.1" 200 0
+WARNING 2018-12-10 09:10:57,977 base 152 Not Found: /emails/
+WARNING 2018-12-10 09:10:57,978 basehttp 124 "PUT /emails/ HTTP/1.1" 404 3271
+INFO 2018-12-10 09:12:13,447 basehttp 124 "OPTIONS /user/ HTTP/1.1" 200 0
+INFO 2018-12-10 09:12:13,964 basehttp 124 "GET /user/ HTTP/1.1" 200 88
+INFO 2018-12-10 09:12:14,010 basehttp 124 "OPTIONS /browse_histories/ HTTP/1.1" 200 0
+WARNING 2018-12-10 09:12:14,042 base 152 Not Found: /browse_histories/
+WARNING 2018-12-10 09:12:14,051 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 3302
+INFO 2018-12-10 09:12:28,232 basehttp 124 "OPTIONS /emails/ HTTP/1.1" 200 0
+INFO 2018-12-10 09:12:28,688 basehttp 124 "PUT /emails/ HTTP/1.1" 200 30
+INFO 2018-12-10 09:16:05,006 basehttp 124 "GET /user/ HTTP/1.1" 200 88
+WARNING 2018-12-10 09:16:05,091 base 152 Not Found: /browse_histories/
+WARNING 2018-12-10 09:16:05,099 basehttp 124 "GET /browse_histories/ HTTP/1.1" 404 3302

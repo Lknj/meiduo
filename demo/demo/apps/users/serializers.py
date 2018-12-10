@@ -124,3 +124,16 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'mobile', 'email', 'email_active']
+
+
+class EmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email']
+
+    def update(self, instance, validated_data):
+        # 重写update()方法,保持原有的操作不变,新增发邮件的代码
+        result = super().update(instance, validated_data)
+        # 发邮件
+
+        return result
