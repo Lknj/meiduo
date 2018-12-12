@@ -2615,3 +2615,8 @@ ImportError: Could not import 'utils.exceptions.exception_handler' for API setti
 ERROR 2018-12-12 15:57:34,120 basehttp 124 "PUT /addresses/1/ HTTP/1.1" 500 131126
 INFO 2018-12-12 15:59:09,282 basehttp 124 "OPTIONS /addresses/1/ HTTP/1.1" 200 0
 INFO 2018-12-12 15:59:09,850 basehttp 124 "PUT /addresses/1/ HTTP/1.1" 200 328
+INFO 2018-12-12 16:25:43,000 basehttp 124 "OPTIONS /addresses/1/ HTTP/1.1" 200 0
+INFO 2018-12-12 16:25:43,362 basehttp 124 "DELETE /addresses/1/ HTTP/1.1" 204 0
+INFO 2018-12-12 16:26:17,595 basehttp 124 "OPTIONS /addresses/ HTTP/1.1" 200 0
+INFO 2018-12-12 16:26:17,888 basehttp 124 "GET /areas/ HTTP/1.1" 200 1204
+INFO 2018-12-12 16:26:18,632 basehttp 124 "GET /addresses/ HTTP/1.1" 200 380

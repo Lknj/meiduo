@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from .models import User, Address
 from rest_framework.response import Response
@@ -96,3 +97,9 @@ class AddressesView(ModelViewSet):
 
     # def put(self, request):
     #     return self.update(request)
+    # 重写destroy,设计逻辑删除
+    def destroy(self, request, *args, **kwargs):
+        addresses = self.get_object()
+        addresses.is_deleted = True
+        addresses.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
