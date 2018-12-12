@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Address
 import re
 from django_redis import get_redis_connection
 from rest_framework_jwt.settings import api_settings
 from celery_tasks.send_active_mail.tasks import send_active_mail_task
+
 
 # class UserRegisterSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.Serializer):
@@ -142,3 +143,27 @@ class EmailSerializer(serializers.ModelSerializer):
         )
 
         return result
+
+
+class AddressCreateSerializer(serializers.ModelSerializer):
+    # 省市区的外键, 通过_id进行设置
+    province_id = serializers.IntegerField()
+    city_id = serializers.IntegerField()
+    district_id = serializers.IntegerField()
+    # 省市区信息, 以字符串输出
+    province = serializers.StringRelatedField(read_only=True)
+    city = serializers.StringRelatedField(read_only=True)
+    district = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Address
+        # fields = ['receiver', 'provice_id', 'city_id', 'district_id', 'place', 'mobile']
+        exclude = ['title', 'is_deleted', 'user']
+
+    def create(self, validated_data):
+        # 接收数据,为属性赋值, 创建
+        # 重写此方法, 添加user_id参数, 不接收客户端传递user_id参数
+        validated_data['user_id'] = self.context['request'].user.id
+        validated_data['title'] = validated_data['receiver']
+
+        return super().create(validated_data)

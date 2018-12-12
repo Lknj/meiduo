@@ -10,3 +10,6 @@ class AreaInfo(models.Model):
     # 区县: city.subs
     class Meta:
         db_table = 'tb_areas'
+
+    def __str__(self):
+        return self.name

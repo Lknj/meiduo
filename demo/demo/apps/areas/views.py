@@ -1,9 +1,10 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from .models import AreaInfo
 from .serializers import AreaSerializer, SubAreaSerializer
+from rest_framework_extensions.cache.mixins import CacheResponseMixin
 
 
-class AreaViewSet(ReadOnlyModelViewSet):
+class AreaViewSet(CacheResponseMixin, ReadOnlyModelViewSet):
     # list ====> 查询列表
     # retrieve =====> 根据主键查询对象
     # queryset = AreaInfo.objects.all()

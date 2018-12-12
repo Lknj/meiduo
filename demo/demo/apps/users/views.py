@@ -1,9 +1,10 @@
 from rest_framework.views import APIView
-from .models import User
+from .models import User, Address
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView, ListCreateAPIView
 from .serializers import UserRegisterSerializer, UserSerializer, EmailSerializer
 from rest_framework.permissions import IsAuthenticated
+from .serializers import AddressCreateSerializer
 
 
 class UsernameCountView(APIView):
@@ -63,8 +64,29 @@ class EmailView(UpdateAPIView):
     '''
     # 要求登录
     permission_classes = [IsAuthenticated]
+
     # queryset =
     # 重写get_object()方法
     def get_object(self):
         return self.request.user
+
     serializer_class = EmailSerializer
+
+
+class AddressView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = AddressCreateSerializer
+
+    ## 查询当期登录用户的所有收货地址
+    # queryset = Address.objects.all()
+    def get(self, request):
+        # 查询当期登录用户的所有收货地址
+        user = self.request.user
+        addresses = user.addresses.filter(is_deleted=False)
+        serializer = self.get_serializer(addresses, many=True)
+
+        return Response({
+            'addresses': serializer.data,
+            'limit': 5,
+            'default_address_id': user.default_address_id
+        })
