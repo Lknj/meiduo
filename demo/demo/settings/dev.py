@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'verifycations.apps.VerifycationsConfig',
     'oauth.apps.OauthConfig',
+    'areas.apps.AreasConfig',
 
     # drf
     'rest_framework',
@@ -259,7 +260,7 @@ EMAIL_PORT = 25
 # 发送邮件的邮箱
 EMAIL_HOST_USER = 'lknj66@163.com'
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'shouquanma66'
+EMAIL_HOST_PASSWORD = 'liu808920'
 # 收件人看到的发件人, 设置为公司的客服邮箱
 EMAIL_FROM = '美多商城<lknj66@163.com>'
 # 验证邮箱的过期时间
