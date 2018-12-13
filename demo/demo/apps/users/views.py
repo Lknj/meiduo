@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.views import APIView
 from .models import User, Address
 from rest_framework.response import Response
@@ -82,11 +83,16 @@ class AddressesView(ModelViewSet):
     serializer_class = AddressCreateSerializer
     queryset = Address.objects.all()
 
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return user.addresses.filter(is_deleted=False)
+
     ## 查询当期登录用户的所有收货地址
     def list(self, request, *args, **kwargs):
         # 查询当期登录用户的所有收货地址
         user = self.request.user
         addresses = user.addresses.filter(is_deleted=False)
+        # addresses = self.get_queryset()
         serializer = self.get_serializer(addresses, many=True)
 
         return Response({
@@ -103,3 +109,27 @@ class AddressesView(ModelViewSet):
         addresses.is_deleted = True
         addresses.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(methods=["PUT"], detail=True)
+    def status(self, request, pk):
+        # 设置默认收货地址
+        # 1. 获取当前登录的用户对象
+        user = request.user
+        # 2. 修改默认收货地址属性
+        user.default_address_id = pk
+        # 3. 保存
+        user.save()
+        # 响应
+        return Response({'message': "OK"})
+
+    @action(methods=["PUT"], detail=True)
+    def title(self, request, pk):
+        # 修改标题
+        # 1. 获取当前收货地址对象
+        address = self.get_object()
+        # 2. 修改属性axios.put(路径,参数,回调函数)
+        address.title = request.data.get('title')
+        # 3. 保存
+        address.save()
+        # 4. 响应
+        return Response({'message': 'OK'})
