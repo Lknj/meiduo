@@ -289,3 +289,9 @@ CKEDITOR_CONFIGS = {
     },
 }
 CKEDITOR_UPLOAD_PATH = ''  # 上传图片保存路径，使用了FastDFS，所以此处设为''
+
+# FDFS配置
+FDFS_CLIENT = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
+FDFS_URL = 'http://image.meiduo.site:8888'
+# 指定django使用的文件存储类型
+DEFAOLT_FILE_STORAGE = 'demo.utils.fastdfs.fdfs_storage.FdfsStorage'
