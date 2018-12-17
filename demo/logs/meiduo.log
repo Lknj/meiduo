@@ -3737,3 +3737,45 @@ INFO 2018-12-16 09:45:07,163 basehttp 124 "GET /admin/ HTTP/1.1" 200 8087
 INFO 2018-12-16 09:45:12,722 basehttp 124 "GET /admin/goods/skuimage/40/change/ HTTP/1.1" 200 7049
 INFO 2018-12-16 09:45:15,129 basehttp 124 "GET /admin/goods/skuimage/ HTTP/1.1" 200 15884
 INFO 2018-12-16 09:45:16,909 basehttp 124 "GET /admin/ HTTP/1.1" 200 7874
+INFO 2018-12-17 16:54:03,150 basehttp 124 "OPTIONS /cart/ HTTP/1.1" 200 0
+WARNING 2018-12-17 16:54:03,549 base 152 Not Found: /categories/115/
+WARNING 2018-12-17 16:54:03,557 basehttp 124 "GET /categories/115/ HTTP/1.1" 404 6578
+WARNING 2018-12-17 16:54:03,555 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 16:54:03,559 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 404 6642
+WARNING 2018-12-17 16:54:05,486 base 152 Not Found: /cart/
+WARNING 2018-12-17 16:54:05,491 basehttp 124 "GET /cart/ HTTP/1.1" 404 6548
+WARNING 2018-12-17 16:54:13,425 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 16:54:13,428 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=price HTTP/1.1" 404 6635
+WARNING 2018-12-17 16:54:14,250 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 16:54:14,254 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 404 6642
+INFO 2018-12-17 17:06:49,462 basehttp 124 "OPTIONS /cart/ HTTP/1.1" 200 0
+WARNING 2018-12-17 17:06:49,945 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 17:06:49,978 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 404 6642
+WARNING 2018-12-17 17:06:49,991 base 152 Not Found: /categories/115/
+WARNING 2018-12-17 17:06:50,019 basehttp 124 "GET /categories/115/ HTTP/1.1" 404 6578
+WARNING 2018-12-17 17:06:50,961 base 152 Not Found: /cart/
+WARNING 2018-12-17 17:06:50,965 basehttp 124 "GET /cart/ HTTP/1.1" 404 6548
+WARNING 2018-12-17 17:07:03,339 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 17:07:03,344 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 404 6642
+WARNING 2018-12-17 17:07:03,370 base 152 Not Found: /categories/115/
+WARNING 2018-12-17 17:07:03,370 basehttp 124 "GET /categories/115/ HTTP/1.1" 404 6578
+WARNING 2018-12-17 17:07:03,428 base 152 Not Found: /cart/
+WARNING 2018-12-17 17:07:03,432 basehttp 124 "GET /cart/ HTTP/1.1" 404 6548
+WARNING 2018-12-17 17:10:33,402 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 17:10:33,441 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 404 6642
+WARNING 2018-12-17 17:10:33,408 base 152 Not Found: /categories/115/
+WARNING 2018-12-17 17:10:33,443 basehttp 124 "GET /categories/115/ HTTP/1.1" 404 6578
+WARNING 2018-12-17 17:10:33,430 base 152 Not Found: /cart/
+WARNING 2018-12-17 17:10:33,444 basehttp 124 "GET /cart/ HTTP/1.1" 404 6548
+WARNING 2018-12-17 17:15:35,031 base 152 Not Found: /categories/115/
+WARNING 2018-12-17 17:15:35,223 basehttp 124 "GET /categories/115/ HTTP/1.1" 404 6578
+WARNING 2018-12-17 17:15:35,063 base 152 Not Found: /cart/
+WARNING 2018-12-17 17:15:35,035 base 152 Not Found: /categories/115/skus/
+WARNING 2018-12-17 17:15:35,229 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 404 6642
+WARNING 2018-12-17 17:15:35,229 basehttp 124 "GET /cart/ HTTP/1.1" 404 6548
+INFO 2018-12-17 17:17:38,742 basehttp 124 "OPTIONS /cart/ HTTP/1.1" 200 0
+WARNING 2018-12-17 17:17:39,014 base 152 Not Found: /categories/115/
+WARNING 2018-12-17 17:17:39,018 basehttp 124 "GET /categories/115/ HTTP/1.1" 404 6771
+WARNING 2018-12-17 17:17:39,092 base 152 Not Found: /cart/
+WARNING 2018-12-17 17:17:39,094 basehttp 124 "GET /cart/ HTTP/1.1" 404 6741
+INFO 2018-12-17 17:17:40,947 basehttp 124 "GET /categories/115/skus/?page=1&page_size=5&ordering=-create_time HTTP/1.1" 200 1321

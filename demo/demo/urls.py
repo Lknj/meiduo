@@ -22,5 +22,6 @@ urlpatterns = [
     url('^', include('users.urls')),
     url('^oauth/', include('oauth.urls')),
     url('^', include('areas.urls')),
+    url('^', include('goods.urls')),
 
 ]

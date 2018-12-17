@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'ckeditor',
     # 富文本编辑器上传图片模块
     'ckeditor_uploader',
+    # 定时任务
+    'django_crontab',
 
 ]
 
@@ -77,7 +79,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'demo.urls'
-
+# print(os.path.join(BASE_DIR, 'templates'))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -295,3 +297,14 @@ FDFS_CLIENT = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
 FDFS_URL = 'http://image.meiduo.site:8888'
 # 指定django使用的文件存储类型
 DEFAOLT_FILE_STORAGE = 'demo.utils.fastdfs.fdfs_storage.FdfsStorage'
+
+
+# 生成静态页面的路径
+GENERATE_STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'front_end_pc/')
+# 定时任务
+CRONJOBS = [
+    # 每5分钟执行一次生成主页静态文件
+    ('*/5 * * * *', 'contents.crons.generate_index_html', '>> ' + os.path.dirname(BASE_DIR) + '/logs/crontab.log')
+]
+# 解决crontab中文问题
+CRONTAB_COMMAND_PREFIX = 'LANG_ALL=zh_cn.UTF-8'
