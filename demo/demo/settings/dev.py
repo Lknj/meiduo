@@ -229,6 +229,8 @@ REST_FRAMEWORK = {
         # session=====用于admin
         'rest_framework.authentication.SessionAuthentication',
     ),
+    # 分页, 但是有的地方不想用分页,所以不采用这种方法
+    # 'DEFAULT_PAGINATION_CLASS': 'utils.pagination.StandardResultsSetPagination',
 }
 
 # jwt
