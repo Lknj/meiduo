@@ -1,8 +1,9 @@
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import ListAPIView
 from .models import SKU
-from .serializers import SKUSerializer
+from .serializers import SKUSerializer, SKUIndexSerializer
 from demo.utils.pagination import StandardResultsSetPagination
+from drf_haystack.viewsets import HaystackViewSet
 
 
 class SKUListView(ListAPIView):
@@ -17,3 +18,12 @@ class SKUListView(ListAPIView):
 
     filter_backends = (OrderingFilter,)
     ordering_fields = ('create_time', 'price', 'sales')
+
+
+class SKUSearchViewSet(HaystackViewSet):
+    """
+    SKU搜索
+    """
+    index_models = [SKU]
+    serializer_class = SKUIndexSerializer
+    pagination_class = StandardResultsSetPagination
