@@ -4,7 +4,8 @@ import re
 from django_redis import get_redis_connection
 from rest_framework_jwt.settings import api_settings
 from celery_tasks.send_active_mail.tasks import send_active_mail_task
-
+from goods.models import SKU
+from django_redis import get_redis_connection
 
 # class UserRegisterSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.Serializer):
@@ -62,8 +63,8 @@ class UserRegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError('手机号已存在')
         return value
 
-    # 判断短信验证码不应该在这里写
-    # def validate_sms_code(self, value):
+        # 判断短信验证码不应该在这里写
+        # def validate_sms_code(self, value):
         # redis_cli.get('sms_' + mobile) == > 返回值
 
     def validate_allow(self, value):
@@ -167,3 +168,31 @@ class AddressCreateSerializer(serializers.ModelSerializer):
         validated_data['title'] = validated_data['receiver']
 
         return super().create(validated_data)
+
+
+class HistorySerializer(serializers.Serializer):
+    sku_id = serializers.IntegerField()
+
+    def validate_sku_id(self, value):
+        # sku_id有效
+        if SKU.objects.filter(pk=value).count() <= 0:
+            raise serializers.ValidationError('无效的商品编号')
+        return value
+
+    def create(self, validated_data):
+        '''
+        向redis的最近浏览器,添加指定的商品编号
+        '''
+        sku_id = validated_data.get('sku_id')
+
+        # 1. 链接redis
+        redis_cli = get_redis_connection('history')
+        key = 'history%d' % self.context['request'].user.id
+        # 2. 删除sku_id
+        redis_cli.lrem(key, 0, sku_id)
+        # 3. 添加
+        redis_cli.lpush(key, sku_id)
+        # 4. 截取
+        redis_cli.ltrim(key, 0, 4)
+
+        return validated_data

@@ -12,7 +12,7 @@ urlpatterns = [
     url('^user/$', views.UserView.as_view()),
     url('^emails/$', views.EmailView.as_view()),
     # url('^addresses/$', views.AddressView.as_view()),
-
+    url('^browse_histories/$', views.HistoryView.as_view()),
 ]
 
 router = DefaultRouter()

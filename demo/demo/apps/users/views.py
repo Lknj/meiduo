@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView, ListCreateAPIView
 from .serializers import UserRegisterSerializer, UserSerializer, EmailSerializer
 from rest_framework.permissions import IsAuthenticated
-from .serializers import AddressCreateSerializer
+from .serializers import AddressCreateSerializer, HistorySerializer
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import ModelViewSet
 
@@ -133,3 +133,18 @@ class AddressesView(ModelViewSet):
         address.save()
         # 4. 响应
         return Response({'message': 'OK'})
+
+
+class HistoryView(CreateAPIView):
+    # 增加,被写好了,集成自它就行了
+
+    # def post(self, request):
+    #     # 1. 接收请求
+    #     # 2. 验证
+    #     # 3. 保存
+    #
+    #     pass
+    permission_classes = [IsAuthenticated]
+    serializer_class = HistorySerializer
+    # 查询
+    pass
