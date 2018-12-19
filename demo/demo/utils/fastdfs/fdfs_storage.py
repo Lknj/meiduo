@@ -4,6 +4,11 @@ from django.conf import settings
 
 
 class FdfsStorage(Storage):
+
+    def __init__(self):
+        self.base_url = settings.FDFS_URL
+        self.client_conf = settings.FDFS_CLIENT
+
     def open(self, name, mode='rb'):
         # 打开文件,文件读取在fastdfs中,不需要本地读取,通过url读取
         pass
@@ -24,4 +29,5 @@ class FdfsStorage(Storage):
 
     def url(self, name):
         # 通过nginx访问,返回访问的域名及地址
-        return settings.FDFS_URL + name
+        print(self.base_url + name)
+        return self.base_url + name
