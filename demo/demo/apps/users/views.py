@@ -1,6 +1,8 @@
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.views import APIView
+
+from goods.models import SKU
 from .models import User, Address
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView, ListCreateAPIView
@@ -9,6 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import AddressCreateSerializer, HistorySerializer
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import ModelViewSet
+from django_redis import get_redis_connection
+from goods.serializers import SKUSerializer
 
 
 class UsernameCountView(APIView):
@@ -146,5 +150,19 @@ class HistoryView(CreateAPIView):
     #     pass
     permission_classes = [IsAuthenticated]
     serializer_class = HistorySerializer
-    # 查询
-    pass
+
+    # 查询: 从redis中获取商品编号,根据编号从mysql中查询商品数据
+    def get(self, request):
+        # 1. 从redis中获取商品编号
+        redis_cli = get_redis_connection('history')
+        key = 'history%d' % request.user.id
+        sku_ids = redis_cli.lrange(key, 0, -1)
+        # 从redis中读取的数据为bytes类型,需要换成int
+        sku_ids = [int(sku_id) for sku_id in sku_ids]
+        # 2. 根据编号从mysql中查询商品数据
+        # skus = SKU.objects.filter(pk__in=sku_ids)
+        skus = []
+        for sku_id in sku_ids:
+            skus.append(SKU.objects.get(pk=sku_id))
+        serializer = SKUSerializer(skus, many=True)
+        return Response(serializer.data)
