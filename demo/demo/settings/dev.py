@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'verifycations.apps.VerifycationsConfig',
     'oauth.apps.OauthConfig',
     'areas.apps.AreasConfig',
+    'goods.apps.GoodsConfig',
+    'contents.apps.ContentsConfig',
 
     # drf
     'rest_framework',
